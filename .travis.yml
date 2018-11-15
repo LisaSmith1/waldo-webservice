@@ -1,24 +1,17 @@
 language: php
-sudo: false
-
-dist: trusty
-
+sudo: required
 php:
-  - 7.2
-
+- 7.2
 services:
-  - docker
-
+- docker
 install:
-  - docker build -t waldo .
-  - docker run -d -p 127.0.0.1:80:80 --name waldo waldo
-
+- docker build -t waldo .
+- docker run -d -p 127.0.0.1 80:80 --name waldo waldo
 before_install:
-  - composer self-update
-  - composer install --no-interaction
-  - cat .env.example >> .env
-
+- openssl aes-256-cbc -K $encrypted_7afa28dd7b92_key -iv $encrypted_7afa28dd7b92_iv
+  -in .env.enc -out .env -d
+- composer self-update
+- composer install --no-interaction
 script:
-  - docker ps | grep -q waldo
-  - vendor/bin/phpunit
-
+- docker ps | grep -q waldo
+- docker exec waldo vendor/bin/phpunit
