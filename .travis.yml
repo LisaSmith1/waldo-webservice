@@ -16,7 +16,7 @@ install:
 before_install:
   - composer self-update
   - composer install --no-interaction
-  - cat .env.travis >> .env
+  - cat .env.example >> .env
 
 script:
   - docker ps | grep -q waldo
