@@ -1,0 +1,24 @@
+language: php
+sudo: false
+
+dist: trusty
+
+php:
+  - 7.2
+
+services:
+  - docker
+
+install:
+  - docker build -t waldo .
+  - docker run -d -p 127.0.0.1:80:80 --name waldo waldo
+
+before_install:
+  - composer self-update
+  - composer install --no-interaction
+  - cat .env.travis >> .env
+
+script:
+  - docker ps | grep -q waldo
+  - vendor/bin/phpunit
+
