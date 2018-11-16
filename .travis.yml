@@ -1,12 +1,16 @@
 sudo: required
 services:
 - docker
-install:
+#install:
+before_install:
 - docker build -t waldo .
 - docker run -d --name waldo waldo
-before_install:
+#before_install:
 - openssl aes-256-cbc -K $encrypted_7afa28dd7b92_key -iv $encrypted_7afa28dd7b92_iv
   -in .env.enc -out .env -d
+before_script:
+- docker-compose exec -T waldo composer self-update
+- docker-compose exec -T waldo composer install --no-interaction
 script:
-- docker ps | grep -q waldo
-- docker exec -T waldo vendor/bin/phpunit --coverage-clover=coverage.xml
+#- docker ps | grep -q waldo
+- docker-compose exec -T waldo vendor/bin/phpunit
