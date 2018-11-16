@@ -9,4 +9,3 @@ before_install:
   -in .env.enc -out .env -d
 script:
 - docker ps | grep -q waldo
-#- docker exec waldo vendor/bin/phpunit
