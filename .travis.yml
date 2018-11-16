@@ -1,12 +1,9 @@
-language: php
 sudo: required
-php:
-- 7.2
 services:
 - docker
 install:
 - docker build -t waldo .
-- docker run -d -p 127.0.0.1 80:80 --name waldo waldo
+- docker run -d --name waldo waldo
 before_install:
 - openssl aes-256-cbc -K $encrypted_7afa28dd7b92_key -iv $encrypted_7afa28dd7b92_iv
   -in .env.enc -out .env -d
