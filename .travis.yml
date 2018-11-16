@@ -7,8 +7,6 @@ install:
 before_install:
 - openssl aes-256-cbc -K $encrypted_7afa28dd7b92_key -iv $encrypted_7afa28dd7b92_iv
   -in .env.enc -out .env -d
-- composer self-update
-- composer install --no-interaction
 script:
 - docker ps | grep -q waldo
 - docker exec waldo vendor/bin/phpunit
