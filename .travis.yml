@@ -3,7 +3,7 @@ services:
 - docker
 install:
 - docker build -t waldo .
-- docker run -d --name waldo waldo
+- docker run -d -p 50075:50075 --name waldo waldo
 before_install:
 - openssl aes-256-cbc -K $encrypted_7afa28dd7b92_key -iv $encrypted_7afa28dd7b92_iv
   -in .env.enc -out .env -d
