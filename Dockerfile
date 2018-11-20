@@ -7,4 +7,3 @@ COPY --chown=www-data:www-data . /var/www/
 WORKDIR /var/www/
 RUN composer install
 
-EXPOSE 50075
